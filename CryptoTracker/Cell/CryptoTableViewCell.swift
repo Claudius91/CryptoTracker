@@ -60,6 +60,8 @@ class CryptoTableViewCell : UITableViewCell {
         self.contentView.addSubview(self.symbolLabel)
         self.contentView.addSubview(self.priceLabel)
         self.contentView.addSubview(self.iconImageView)
+        
+        self.setupConstraints()
     }
     
     required init(coder: NSCoder) {
@@ -70,17 +72,17 @@ class CryptoTableViewCell : UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let size: CGFloat = self.contentView.frame.size.height/1.1
-        self.iconImageView.frame = CGRect(x: 20, y: (self.contentView.frame.size.height-size)/2, width: size, height: size)
-        
-        
-        self.nameLabel.sizeToFit()
-        self.priceLabel.sizeToFit()
-        self.symbolLabel.sizeToFit()
-        
-        self.nameLabel.frame = CGRect(x: 30 + size, y: 0, width: self.contentView.frame.size.width/2, height: self.contentView.frame.size.height/2)
-        self.symbolLabel.frame = CGRect(x: 30 + size, y: self.contentView.frame.size.height/2, width: self.contentView.frame.size.width/2, height: self.contentView.frame.size.height/2)
-        self.priceLabel.frame = CGRect(x: self.contentView.frame.size.width/2, y: 0, width: (self.contentView.frame.size.width/2)-15, height: self.contentView.frame.size.height)
+//        let size: CGFloat = self.contentView.frame.size.height/1.1
+//        self.iconImageView.frame = CGRect(x: 20, y: (self.contentView.frame.size.height-size)/2, width: size, height: size)
+//
+//
+//        self.nameLabel.sizeToFit()
+//        self.priceLabel.sizeToFit()
+//        self.symbolLabel.sizeToFit()
+//
+//        self.nameLabel.frame = CGRect(x: 30 + size, y: 0, width: self.contentView.frame.size.width/2, height: self.contentView.frame.size.height/2)
+//        self.symbolLabel.frame = CGRect(x: 30 + size, y: self.contentView.frame.size.height/2, width: self.contentView.frame.size.width/2, height: self.contentView.frame.size.height/2)
+//        self.priceLabel.frame = CGRect(x: self.contentView.frame.size.width/2, y: 0, width: (self.contentView.frame.size.width/2)-15, height: self.contentView.frame.size.height)
     }
     
     override func prepareForReuse() {
@@ -89,6 +91,29 @@ class CryptoTableViewCell : UITableViewCell {
         self.nameLabel.text = nil
         self.priceLabel.text = nil
         self.symbolLabel.text = nil
+    }
+    
+    func setupConstraints() {
+        
+        self.iconImageView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 10).isActive = true
+        self.iconImageView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -10).isActive = true
+        self.iconImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 10).isActive = true
+        self.iconImageView.widthAnchor.constraint(equalToConstant: self.contentView.frame.size.height).isActive = true
+        self.iconImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.priceLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -10).isActive = true
+        self.priceLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 10).isActive = true
+        self.priceLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -10).isActive = true
+        self.priceLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.nameLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 10).isActive = true
+        self.nameLabel.leftAnchor.constraint(equalTo: self.iconImageView.rightAnchor, constant: 10).isActive = true
+        self.nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.symbolLabel.leftAnchor.constraint(equalTo: self.iconImageView.rightAnchor, constant: 10).isActive = true
+        self.symbolLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -10).isActive = true
+        self.symbolLabel.translatesAutoresizingMaskIntoConstraints = false
+
     }
     
     // Configure
